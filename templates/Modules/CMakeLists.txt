@@ -1,1 +1,3 @@
-../../CMakeTextFiles/CMakeLists-module-top.txt
+add_subdirectory(inc)
+add_subdirectory(src)
+add_subdirectory(test)

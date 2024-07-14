@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_subdirectory(Applications)
+add_subdirectory(Apps)
 add_subdirectory(Modules)
 
 get_filename_component(CURRENT_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)

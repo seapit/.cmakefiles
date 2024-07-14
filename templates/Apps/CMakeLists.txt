@@ -1,1 +1,1 @@
-../../CMakeTextFiles/CMakeLists-app-top.txt
+add_subdirectory(App1)
