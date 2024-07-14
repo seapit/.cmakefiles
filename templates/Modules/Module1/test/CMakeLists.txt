@@ -1,1 +1,1 @@
-../../../CMakeTextFiles/CMakeLists-test.txt
+../../../../CMakeTextFiles/CMakeLists-test.txt
