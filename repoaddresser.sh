@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# Source the output from find_git_root.sh
-echo "$1 $2"
-
-"/workspace/cpp/$2/.cmakefiles/repohelper.sh $1"
+"/workspaces/cpp/$2/.cmakefiles/repohelper.sh $1"
 
 # # Check if the variables are set
 if [[ "$1" == "init" ]]; then
