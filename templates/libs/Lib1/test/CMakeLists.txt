@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.28)
+
 # Get the name of the library directory
 get_filename_component(LIB_NAME ${CMAKE_CURRENT_SOURCE_DIR}/.. NAME)
 

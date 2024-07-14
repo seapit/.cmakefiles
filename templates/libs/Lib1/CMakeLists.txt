@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
 
-# Include the external cmake file
-include(${CMAKE_SOURCE_DIR}/CMakeLib.cmake)
-
 # Get the name of the current directory
 get_filename_component(LIB_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
