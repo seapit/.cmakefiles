@@ -1,5 +1,5 @@
-set(TYPE "static")
-#set(TYPE "shared)
+set(MODULE_OUTPUT_MODE "static")
+#set(MODULE_OUTPUT_MODE "shared)
 set(ARG1 "")
 #set(ARG1 ".c")
 set(ARG2 "")
@@ -18,4 +18,4 @@ elseif(MODULE_OUTPUT_MODE STREQUAL "shared")
   add_library(${CURRENT_MODULE} SHARED ${SRC_FILES})
 endif()
   
-MODULE( TARGET_NAME TYPE ${ARG1} ${ARG2})
+MODULE( TARGET_NAME MODULE_OUTPUT_MODE ${ARG1} ${ARG2})
