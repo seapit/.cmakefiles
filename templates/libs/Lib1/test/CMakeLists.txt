@@ -1,17 +1,17 @@
-cmake_minimum_required(VERSION 3.28)
+# Get the name of the library directory
+get_filename_component(LIB_NAME ${CMAKE_CURRENT_SOURCE_DIR}/.. NAME)
 
-set(ARG1 "")
-#set(ARG1 ".c")
-set(ARG2 "")
-#set(ARG2 "GENERATED)
-include_directories(src)
+# Find all test source files
+file(GLOB_RECURSE TEST_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
-enable_testing()
-find_package (GTest CONFIG REQUIRED)
-include (GoogleTest)
+# Create a test executable
+add_executable(${LIB_NAME}_test ${TEST_SOURCES})
 
-add_executable(TARGET_NAME ${TARGETNAME}Test ${SRC_FILES})
+# Include directories
+target_include_directories(${LIB_NAME}_test PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../inc")
 
-add_Test(NAME ${TARGET_NAME}Test COMMAND ${TARGET_NAME}Test)
+# Link libraries
+target_link_libraries(${LIB_NAME}_test PRIVATE ${LIB_NAME} gtest gtest_main)
 
-TEST( TARGET_NAME ${ARG1} ${ARG2})
+# Add tests
+add_test(NAME ${LIB_NAME}_test COMMAND ${LIB_NAME}_test)

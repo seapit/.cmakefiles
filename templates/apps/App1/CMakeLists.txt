@@ -1,6 +1,3 @@
-# Include the external cmake file
-include(${CMAKE_SOURCE_DIR}/CMakeApp.cmake)
-
 #SET(${APP_NAME}_USE_C_FILES TRUE)
 SET(${APP_NAME}_USE_C_FILES FALSE)
 #SET(${APP_NAME}_USE_GENERATED_FILES TRUE)
@@ -10,4 +7,4 @@ SET(${APP_NAME}_USE_GENERATED_FILES FALSE)
 get_filename_component(APP_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
 # Call the external function with the detected name
-APP(${APP_NAME} ${APP_NAME}_USE_C_FILES ${APP_NAME_USE_GENERATED_FILES})
+APP(${APP_NAME} ${APP_NAME}_USE_C_FILES ${APP_NAME}_USE_GENERATED_FILES)

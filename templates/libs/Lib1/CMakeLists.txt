@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.28)
+
 # Include the external cmake file
 include(${CMAKE_SOURCE_DIR}/CMakeLib.cmake)
 
@@ -13,4 +15,4 @@ SET(${LIB_TYPE} STATIC)
 #SET(${LIB_TYPE} SHARED)
 
 # Call the MODULE function with appropriate arguments
-LIB(${LIB_NAME} ${LIB_TYPE} ${MODULE_NAME}_USE_C_FILES ${MODULE_NAME}_USE_GENERATED_FILES)
+LIB(${LIB_NAME} ${LIB_TYPE} ${LIB_NAME}_USE_C_FILES ${LIB_NAME}_USE_GENERATED_FILES)

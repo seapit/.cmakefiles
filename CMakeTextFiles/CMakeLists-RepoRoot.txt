@@ -15,10 +15,24 @@ include(.cmakefiles/Functions.cmake)
 configure_file(Proj.h.in Proj.inc)
 
 # Include directories
-# TBD IF NEEDED
-#include_directories(${CMAKE_SOURCE_DIR}/libs)
-#include_directories(${CMAKE_SOURCE_DIR}/apps)
+include_directories(${CMAKE_SOURCE_DIR}/libs)
+include_directories(${CMAKE_SOURCE_DIR}/apps)
+
+# Add Google Test
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
+)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
 
 # Add application and library subdirectories
 add_subdirectory(apps)
 add_subdirectory(libs)
+
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING
+            "Default build type: RelWithDebInfo" FORCE)
+endif()

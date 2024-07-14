@@ -22,6 +22,11 @@ function(LIB LIB_NAME LIB_TYPE USE_C_FILES USE_GENERATED_FILES)
     # Include directories
     target_include_directories(${LIB_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/inc")
 
+    # External dependencies
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ext/CMakeLists.txt")
+        add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/ext")
+    endif()
+    
     # Link libraries
     target_link_libraries(${LIB_NAME} PRIVATE ${LIBS})
 endfunction()
