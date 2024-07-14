@@ -1,4 +1,6 @@
-project(Template)
+get_filename_component(CURRENT_DIR ${CMAKE_BINARY_DIR}/.. ABSOLUTE)
+get_filename_component(REPO_NAME ${CURRENT_DIR} NAME)
+project(${REPO_NAME})
 if(NOT WIN32)
   string(ASCII 27 Esc)
   set(ColourReset "${Esc}[m")
