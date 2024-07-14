@@ -1,13 +1,7 @@
 #!/bin/bash
 
 # Directory to list
-directory="$1"
-
-# Ensure the directory exists
-if [ ! -d "$directory" ]; then
-    echo "Directory '$directory' does not exist."
-    exit 1
-fi
+directory="/workspace/cpp"
 
 # List directories within the specified directory
 directories=()
