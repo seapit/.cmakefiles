@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory to list
-directory="/workspace/cpp"
+directory="/workspaces/cpp"
 
 # List directories within the specified directory
 directories=()
