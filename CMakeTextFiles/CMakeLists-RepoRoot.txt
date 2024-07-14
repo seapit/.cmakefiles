@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.28)
+
 get_filename_component(CURRENT_DIR ${CMAKE_BINARY_DIR}/.. ABSOLUTE)
 get_filename_component(REPO_NAME ${CURRENT_DIR} NAME)
 project(${REPO_NAME})
