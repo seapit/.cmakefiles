@@ -1,0 +1,16 @@
+# Include the external cmake file
+include(${CMAKE_SOURCE_DIR}/CMakeLib.cmake)
+
+# Get the name of the current directory
+get_filename_component(LIB_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+
+#SET(${LIB_NAME}_USE_C_FILES TRUE)
+SET(${LIB_NAME}_USE_C_FILES FALSE)
+#SET(${LIB_NAME}_USE_GENERATED_FILES TRUE)
+SET(${LIB_NAME}_USE_GENERATED_FILES FALSE)
+
+SET(${LIB_TYPE} STATIC)
+#SET(${LIB_TYPE} SHARED)
+
+# Call the MODULE function with appropriate arguments
+LIB(${LIB_NAME} ${LIB_TYPE} ${MODULE_NAME}_USE_C_FILES ${MODULE_NAME}_USE_GENERATED_FILES)

@@ -1,3 +1,7 @@
+include(./CMakeApp.cmake)
+include(./CMakeModule.cmake)
+include(./CMakeTest.cmake)
+
 if(NOT WIN32)
   string(ASCII 27 Esc)
   set(ColourReset "${Esc}[m")
@@ -38,41 +42,65 @@ function(message)
 endfunction(message)
 
 function(includecfiles)
-file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
+        file(GLOB_RECURSE C_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
+        list(APPEND SRC ${C_SOURCES})
 endfunction()
 
 function(includegeneratedfiles)
-file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/generated/*)
+file(GLOB_RECURSE GENERATED_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/generated/*)
+list(APPEND SOURCES ${GENERATED_SOURCES})
 endfunction()
 
-function(commonsrc ARG1 ARG2)
-  file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
-  if (${ARG1} STREQUAL ".c")
-    includecfiles()
-  endif()
-  if (${ARG2} STREQUAL "GENERATED")
-    includegeneratedfiles()
-  endif()
-  SET(${TARGET_NAME} ${CURRENT_APP} PARENT_SCOPE)
-endfunction(commonsrc)
+function(APP USE_C_FILES USE_GENERATED_FILES)
+    # Find all source files
+    file(GLOB_RECURSE SRC "src/*.cpp")
 
-function(MODULE TYPE ARG2 ARG3)
-  commonsrc(${ARG2} ${ARG3})
-  include(${CMAKE_BINARY_DIR}/../.cmakefiles/CMakeModule.cmake)
-  if (TYPE STREQUAL "shared")
-    SET(MODULE_OUTPUT_MODE "SHARED")
-  elseif(TYPE STREQUAL "static")
-    SET(MODULE_OUTPUT_MODE "STATIC")
-  endif()
+    if(${USE_C_FILES})
+      includecfiles()
+    endif()
+
+    if(${USE_GENERATED_FILES})
+      includegeneratedfiles()
+    endif()
+
+    # Create an executable
+    add_executable(App1 ${SOURCES})
+
+    # Include directories
+    target_include_directories(App1 PRIVATE inc)
+
+    # Link libraries
+    target_link_libraries(App1 PRIVATE ${LIBS})
+
+    # External dependencies
+    add_subdirectory(ext)
 endfunction()
 
-function(APP TARGET_NAME ARG1 ARG2)
-commonsrc(${ARG2} ${ARG3})
-  if (${ARG1} STREQUAL ".c")
-    includecfiles()
-  endif()
-  include(${CMAKE_BINARY_DIR}/../.cmakefiles/CMakeApp.cmake)
+
+function(MODULE USE_C_FILES USE_GENERATED_FILES)
+    # Find all source files
+    file(GLOB_RECURSE SOURCES "src/*.cpp")
+
+    if(${USE_C_FILES})
+        file(GLOB_RECURSE C_SOURCES "src/*.c")
+        list(APPEND SOURCES ${C_SOURCES})
+    endif()
+
+    if(${USE_GENERATED_FILES})
+        file(GLOB_RECURSE GENERATED_SOURCES "generated/*.cpp")
+        list(APPEND SOURCES ${GENERATED_SOURCES})
+    endif()
+
+    # Create a library
+    add_library(Lib1 STATIC ${SOURCES})
+
+    # Include directories
+    target_include_directories(Lib1 PUBLIC inc)
+
+    # Link libraries
+    target_link_libraries(Lib1 PRIVATE ${LIBS})
 endfunction()
+
 
 function(TEST TARGET_NAME ARG2 ARG3)
 commonsrc(${ARG2} ${ARG3})

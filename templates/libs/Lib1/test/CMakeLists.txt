@@ -1,9 +1,15 @@
+cmake_minimum_required(VERSION 3.28)
+
 set(ARG1 "")
 #set(ARG1 ".c")
 set(ARG2 "")
 #set(ARG2 "GENERATED)
 include_directories(src)
+
 enable_testing()
+find_package (GTest CONFIG REQUIRED)
+include (GoogleTest)
+
 add_executable(TARGET_NAME ${TARGETNAME}Test ${SRC_FILES})
 
 add_Test(NAME ${TARGET_NAME}Test COMMAND ${TARGET_NAME}Test)

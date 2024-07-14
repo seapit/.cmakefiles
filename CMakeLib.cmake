@@ -1,4 +1,4 @@
-function(APP APP_NAME USE_C_FILES USE_GENERATED_FILES)
+function(LIB LIB_NAME LIB_TYPE USE_C_FILES USE_GENERATED_FILES)
     # Find all source files
     file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
@@ -12,17 +12,16 @@ function(APP APP_NAME USE_C_FILES USE_GENERATED_FILES)
         list(APPEND SOURCES ${GENERATED_SOURCES})
     endif()
 
-    # Create an executable
-    add_executable(${APP_NAME} ${SOURCES})
+    # Create a library
+    if(${LIB_TYPE} STREQUAL "STATIC")
+        add_library(${LIB_NAME} STATIC ${SOURCES})
+    else()
+        add_library(${LIB_NAME} SHARED ${SOURCES})
+    endif()
 
     # Include directories
-    target_include_directories(${APP_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/inc")
+    target_include_directories(${LIB_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/inc")
 
     # Link libraries
-    target_link_libraries(${APP_NAME} PRIVATE ${LIBS})
-
-    # External dependencies
-    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ext/CMakeLists.txt")
-        add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/ext")
-    endif()
+    target_link_libraries(${LIB_NAME} PRIVATE ${LIBS})
 endfunction()

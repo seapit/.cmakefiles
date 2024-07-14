@@ -1,11 +1,13 @@
-set(ARG1 "")
-#set(ARG1 ".c")
-set(ARG2 "")
-#set(ARG2 "GENERATED)
+# Include the external cmake file
+include(${CMAKE_SOURCE_DIR}/CMakeApp.cmake)
 
-add_subdirectory(inc)
-add_subdirectory(src)
+#SET(${APP_NAME}_USE_C_FILES TRUE)
+SET(${APP_NAME}_USE_C_FILES FALSE)
+#SET(${APP_NAME}_USE_GENERATED_FILES TRUE)
+SET(${APP_NAME}_USE_GENERATED_FILES FALSE)
 
-target_link_libraries(TARGET_NAME PRIVATE ${MODULE})
-add_executable(TARGET_NAME ${CURRENT_APP} ${SRC_FILES})
-APP( TARGET_NAME ${ARG1} ${ARG2})
+# Get the name of the current directory
+get_filename_component(APP_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+
+# Call the external function with the detected name
+APP(${APP_NAME} ${APP_NAME}_USE_C_FILES ${APP_NAME_USE_GENERATED_FILES})

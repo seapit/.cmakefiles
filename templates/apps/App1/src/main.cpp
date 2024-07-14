@@ -2,6 +2,7 @@
 #include <csignal>
 #include <unistd.h>
 
+#include "App1/inc/template.hpp"
 /// NAMESPACE
 
 

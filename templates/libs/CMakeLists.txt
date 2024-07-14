@@ -1,2 +1,4 @@
-add_subdirectory(Module1)
-#add_subdirectory(Module2)
+cmake_minimum_required(VERSION 3.28)
+
+add_subdirectory(lib1)
+#add_subdirectory(lib2)
