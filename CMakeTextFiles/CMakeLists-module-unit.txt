@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.28)
-
 set(TYPE "static")
 #set(TYPE "shared)
 set(ARG1 "")
@@ -7,7 +5,7 @@ set(ARG1 "")
 set(ARG2 "")
 #set(ARG2 "GENERATED)
 
-add_executable(${CURRENT_APP} ${SRC_FILES})
+add_executable(TARGET_NAME ${CURRENT_APP} ${SRC_FILES})
 target_link_libraries(${TEST_TARGET} ${CURRENT_MODULE} gtest gtest_main gtest_gmock ${TEST_TARGET_LIBS})
 
 if(MODULE_OUTPUT_MODE STREQUAL "static")
