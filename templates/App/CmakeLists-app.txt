@@ -1,5 +1,0 @@
-set(ARG1 "")
-#set(ARG1 ".c")
-set(ARG2 "")
-#set(ARG2 "GENERATED)
-TEST( TARGET_NAME ${ARG1} ${ARG2})
