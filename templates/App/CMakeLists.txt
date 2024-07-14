@@ -1,1 +1,1 @@
-../CMakeLists-app.txt
+../../CMakeTextFiles/CMakeLists-app.txt

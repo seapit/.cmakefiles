@@ -1,1 +1,1 @@
-../CMakeLists-module.txt
+../../CMakeTextFiles/CMakeLists-module.txt
