@@ -1,19 +1,15 @@
 #!/bin/bash
 
 # Source the output from find_git_root.sh
-echo "$1 $2"
 
 # # Check if the variables are set
 if [[ "$1" == "init" ]]; then
-echo "init"
 #  cp "/workspaces/cpp/$2/.cmakefiles/templates/* /workspaces/cpp/$2 -R"
 
 elif [[ "$1" == "app" ]]; then
-echo "app"
 #  cp "/workspaces/cpp/$2/.cmakefiles/templates/Modules/App1* /workspaces/cpp/$2/Modules/Module1 -R"
 
 elif [[ "$1" == "module" ]]; then
-echo "module"
 #  cp "/workspaces/cpp/$2/.cmakefiles/templates/Apps/App1* /workspaces/cpp/$2/Apps/App1 -R"
 
 else
