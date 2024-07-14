@@ -4,4 +4,13 @@ set(ARG1 "")
 #set(ARG1 ".c")
 set(ARG2 "")
 #set(ARG2 "GENERATED)
+
+add_executable(${CURRENT_APP} ${SRC_FILES})
+target_link_libraries(${TEST_TARGET} ${CURRENT_MODULE} gtest gtest_main gtest_gmock ${TEST_TARGET_LIBS})
+
+if(MODULE_OUTPUT_MODE STREQUAL "static")
+  add_library(${CURRENT_MODULE} STATIC ${SRC_FILES})
+elseif(MODULE_OUTPUT_MODE STREQUAL "shared")
+  add_library(${CURRENT_MODULE} SHARED ${SRC_FILES})
+  
 MODULE( TARGET_NAME TYPE ${ARG1} ${ARG2})

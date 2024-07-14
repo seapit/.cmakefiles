@@ -49,10 +49,10 @@ function(commonsrc ARG1 ARG2)
   file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
   if (${ARG1} STREQUAL ".c")
     includecfiles()
-  endif
+  endif()
   if (${ARG2} STREQUAL "GENERATED")
     includegeneratedfiles()
-  endif
+  endif()
   SET(${TARGET_NAME} ${CURRENT_APP} PARENT_SCOPE)
 endfunction(commonsrc)
 
