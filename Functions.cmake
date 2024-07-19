@@ -1,6 +1,8 @@
-include(./CMakeApp.cmake)
-include(./CMakeModule.cmake)
-include(./CMakeTest.cmake)
+cmake_minimum_required(VERSION 3.28)
+
+include(${CMAKE_CURRENT_LIST_DIR}/CMakeApp.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/CMakeLib.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/CMakeTest.cmake)
 
 if(NOT WIN32)
   string(ASCII 27 Esc)
@@ -49,60 +51,4 @@ endfunction()
 function(includegeneratedfiles)
 file(GLOB_RECURSE GENERATED_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/generated/*)
 list(APPEND SOURCES ${GENERATED_SOURCES})
-endfunction()
-
-function(APP USE_C_FILES USE_GENERATED_FILES)
-    # Find all source files
-    file(GLOB_RECURSE SRC "src/*.cpp")
-
-    if(${USE_C_FILES})
-      includecfiles()
-    endif()
-
-    if(${USE_GENERATED_FILES})
-      includegeneratedfiles()
-    endif()
-
-    # Create an executable
-    add_executable(App1 ${SOURCES})
-
-    # Include directories
-    target_include_directories(App1 PRIVATE inc)
-
-    # Link libraries
-    target_link_libraries(App1 PRIVATE ${LIBS})
-
-    # External dependencies
-    add_subdirectory(ext)
-endfunction()
-
-
-function(MODULE USE_C_FILES USE_GENERATED_FILES)
-    # Find all source files
-    file(GLOB_RECURSE SOURCES "src/*.cpp")
-
-    if(${USE_C_FILES})
-        file(GLOB_RECURSE C_SOURCES "src/*.c")
-        list(APPEND SOURCES ${C_SOURCES})
-    endif()
-
-    if(${USE_GENERATED_FILES})
-        file(GLOB_RECURSE GENERATED_SOURCES "generated/*.cpp")
-        list(APPEND SOURCES ${GENERATED_SOURCES})
-    endif()
-
-    # Create a library
-    add_library(Lib1 STATIC ${SOURCES})
-
-    # Include directories
-    target_include_directories(Lib1 PUBLIC inc)
-
-    # Link libraries
-    target_link_libraries(Lib1 PRIVATE ${LIBS})
-endfunction()
-
-
-function(TEST TARGET_NAME ARG2 ARG3)
-commonsrc(${ARG2} ${ARG3})
-include(${CMAKE_BINARY_DIR}/../.cmakefiles/CMakeTest.cmake)
 endfunction()

@@ -1,4 +1,5 @@
 # Example function in CMakeApp.cmake
+cmake_minimum_required(VERSION 3.28)
 
 function(APP APP_NAME USE_C_FILES USE_GENERATED_FILES)
     # Logic specific to handling an app
