@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
 // Define a test fixture class
-class LibTest : public ::testing::Test {
+class TaskTest : public ::testing::Test {
 protected:
   // You can remove any or all of the following functions if their bodies would
   // be empty.
 
-  LibTest() {
+  TaskTest() {
     // You can do set-up work for each test here.
   }
 
-  ~LibTest() override {
+  ~TaskTest() override {
     // You can do clean-up work that doesn't throw exceptions here.
   }
 
@@ -25,6 +25,4 @@ protected:
 };
 
 // Test cases using the test fixture
-TEST_F(LibTest, InitProbably) {
-  
-}
+TEST_F(TaskTest, InitProbably) {}
