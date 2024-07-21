@@ -52,3 +52,10 @@ function(includegeneratedfiles)
 file(GLOB_RECURSE GENERATED_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/generated/*)
 list(APPEND SOURCES ${GENERATED_SOURCES})
 endfunction()
+
+
+function(incThreads)
+# Enable P-threads
+# Find the pthread package
+find_package(Threads REQUIRED)
+endfunction()

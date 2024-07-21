@@ -1,7 +1,7 @@
 # Example function in CMakeApp.cmake
 cmake_minimum_required(VERSION 3.28)
 
-function(APP APP_NAME USE_C_FILES USE_GENERATED_FILES)
+function(APP APP_NAME USE_C USE_GEN)
     # Logic specific to handling an app
     # Replace with actual logic for configuring the app target
     message(STATUS "Configuring app: ${APP_NAME}")
@@ -9,12 +9,12 @@ function(APP APP_NAME USE_C_FILES USE_GENERATED_FILES)
     # Example configuration
     add_executable(${APP_NAME})
     
-    if(${USE_C_FILES})
+    if(${USE_C})
         file(GLOB_RECURSE C_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
         list(APPEND SOURCES ${C_SOURCES})
     endif()
 
-    if(${USE_GENERATED_FILES})
+    if(${USE_GEN})
         file(GLOB_RECURSE GENERATED_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/generated/*.cpp")
         list(APPEND SOURCES ${GENERATED_SOURCES})
     endif()
@@ -24,6 +24,8 @@ function(APP APP_NAME USE_C_FILES USE_GENERATED_FILES)
     
     # Add any other configurations needed
     
+    target_link_libraries(${LIB_NAME} PUBLIC)
+
     # Example usage of a function defined in CMakeApp.cmake
     #include(CMakeAppFunctions)  # Include another script if needed
     #app_specific_function(${APP_NAME})

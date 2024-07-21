@@ -10,70 +10,40 @@ project(${REPO_NAME})
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++23")
 
 # Export Compilation commands for SonarLint
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 #Set Output Directories
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/output/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/output/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/output/staticLib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output/staticLib)
 
 # configure a header file to pass the version number only
 configure_file(Proj.h.in Proj.h)
 
-# Get all targets
-file(GLOB DIR_LIB libs/*)
-
-# Get all targets
-file(GLOB DIR_APP apps/*)
+add_subdirectory(libs)
+add_subdirectory(apps)
 
 # Set Up testing
-option(TESTING "Build Unit Tests" ON)
+option(BUILD_TESTS "Build Unit Tests" ON)
 option(APP "Build Apps" ON)
 
-if(TESTING)
+if(BUILD_TESTS)
   # Add Google Test
   include(FetchContent)
   FetchContent_Declare(
     googletest
-    URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
+    URL https://github.com/google/googletest/archive/refs/tags/v1.15.0.zip
   )
   FetchContent_MakeAvailable(googletest)
 
   enable_testing()
   message(STATUS "Enabling Unit Tests")
   find_package(GTest CONFIG REQUIRED)
-  include(GoogleTest)
+  
   set(GCC_COVERAGE_COMPILE_FLAGS "-g -p0 -coverage-fprofile-arcs -ftest-coverage")
   set(GCC_COVERAGE_LINK_FLAGS "coverage -lgcov")
   set(GTEST_EXTRA_ARGS "--gtest_output=xml:${CMAKE_BINARY_DIR}/build/reports/unitTests")
-endif()
-
-# Libraries
-foreach(DIRNAME ${DIR_LIB})
-  #Set Variables
-  get_filename_component(DIRNAME_STRIP ${DIRNAME} NAME) 
-  set(CURRENT_LIB ${DIRNAME_STRIP})
-  # Setup for tests
-  if(NOT CURRENT_LIB STREQUAL "CMakeLists.txt")
-    if(TESTING)
-      if((DEFINED MODULE_IN_TEST) AND (NOT MODULE_IN_TEST STREQUAL "") AND (NOT MODULE_IN_TEST STREQUAL ${CURRENT_LIB}))
-        continue()
-      endif()
-      set(TEST_TARGET "${CURRENT_LIB}_test")
-      add_subdirectory(${DIRNAME}/test)
-    endif()
-  endif()
-endforeach()
-
-# Apps
-if(APP)
-  foreach(DIRNAME ${DIR_APP})
-    #Set Variables
-    get_filename_component(DIRNAME_STRIP ${DIRNAME} NAME) 
-    set(CURRENT_APP ${DIRNAME_STRIP})
-    
-    add_subdirectory(${DIRNAME})
-  endforeach()
 endif()
