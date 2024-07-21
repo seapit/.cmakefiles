@@ -3,10 +3,9 @@ cmake_minimum_required(VERSION 3.10)
 
 # Define the TEST function
 function(TEST LIB_NAME)
-    if(BUILD_TESTS)
+    if(BUILD_TESTING)
         enable_testing()
         message(STATUS "Configuring target '${LIB_NAME}_Test' (Unit-Tests)..")
-        include(GoogleTest)
 
         # Set extra arguments for gtest
         set(GTEST_EXTRA_ARGS "")
@@ -20,6 +19,7 @@ function(TEST LIB_NAME)
         target_link_libraries(${LIB_NAME}_Test PRIVATE ${LIB_NAME} GTest::gtest_main)
 
         # Discover tests and pass extra arguments
+        include(GoogleTest)
         gtest_discover_tests(${LIB_NAME}_Test EXTRA_ARGS ${GTEST_EXTRA_ARGS})
 
         add_test(NAME ${LIB_NAME}_Test COMMAND ${LIB_NAME}_Test)
