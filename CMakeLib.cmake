@@ -27,7 +27,7 @@ function(LIB LIB_NAME LIB_TYPE USE_C USE_GEN)
         add_library(${LIB_NAME} SHARED ${SOURCES})
 
         # Include directories
-        target_include_directories(${LIB_NAME} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/inc")
+        target_include_directories(${LIB_NAME} PUBLIC "${CMAKE_CURRENT_LIST_DIR}/inc")
     else()
         add_library(${LIB_NAME} INTERFACE)
 
