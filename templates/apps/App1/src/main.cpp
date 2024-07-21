@@ -1,18 +1,18 @@
 /// INCLUDES
-#include <csignal>
-#include <unistd.h>
+// #include <csignal>
+// #include <unistd.h>
 
-#include "App1/inc/template.hpp"
+//#include "App1/Template.hpp"
 /// NAMESPACE
 
 
 /// DEFINES
 
-int main(){
+// int main(){
 
-  while(true)
-  {
-    sleep(10);
-  }
-  return 0;
-}
+//   while(true)
+//   {
+//     sleep(10);
+//   }
+//   return 0;
+// }
