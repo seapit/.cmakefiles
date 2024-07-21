@@ -15,13 +15,13 @@ function(TEST LIB_NAME)
         add_executable(${LIB_NAME}_Test ${TEST_SOURCES})
 
         # Include directories
-        target_include_directories(${LIB_NAME}_Test PRIVATE ../inc)
+       # target_include_directories(${LIB_NAME}_Test PRIVATE ../inc)
 
         # Link libraries
         target_link_libraries(${LIB_NAME}_Test PRIVATE ${LIB_NAME} gtest_main gmock)
 
         include(GoogleTest)
-        
+
         # Discover tests and pass extra arguments
         gtest_discover_tests(${LIB_NAME}_Test EXTRA_ARGS ${GTEST_EXTRA_ARGS})
 

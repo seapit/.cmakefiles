@@ -19,20 +19,28 @@ function(LIB LIB_NAME LIB_TYPE USE_C USE_GEN)
     # Create a library
     if(${LIB_NAME}_TYPE STREQUAL "STATIC")
         add_library(${LIB_NAME} STATIC ${SOURCES})
-    elseif(${LIB_NAME}_TYPE STREQUAL "STATIC")
+
+        # Include directories
+        target_include_directories(${LIB_NAME} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/inc")
+
+    elseif(${LIB_NAME}_TYPE STREQUAL "SHARED")
         add_library(${LIB_NAME} SHARED ${SOURCES})
+
+        # Include directories
+        target_include_directories(${LIB_NAME} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/inc")
     else()
         add_library(${LIB_NAME} INTERFACE)
+
+        # Include directories
+        target_include_directories(${LIB_NAME} INTERFACE "${CMAKE_CURRENT_LIST_DIR}/inc")
     endif()
 
-    # Include directories
-    #target_include_directories(${LIB_NAME} PUBLIC "${CMAKE_CURRENT_LIST_DIR}/inc")
 
     # External dependencies
     # if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/ext/CMakeLists.txt")
     #     add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/ext")
     # endif()
 
-    message(STATUS "Configured module: ${LIB_NAME}")
+    message(STATUS "Configured library: ${LIB_NAME}")
 endfunction()
 
