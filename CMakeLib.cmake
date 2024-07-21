@@ -35,7 +35,6 @@ function(LIB LIB_NAME LIB_TYPE USE_C USE_GEN)
         target_include_directories(${LIB_NAME} INTERFACE "${CMAKE_CURRENT_LIST_DIR}/inc")
     endif()
 
-
     # External dependencies
     # if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/ext/CMakeLists.txt")
     #     add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/ext")

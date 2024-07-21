@@ -21,14 +21,14 @@ function(APP APP_NAME USE_C USE_GEN)
 
     # Set include directories, link libraries, etc.
     target_include_directories(${APP_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/apps/${APP_NAME}/inc)
-    
+
     # Add any other configurations needed
-    
     target_link_libraries(${LIB_NAME} PUBLIC)
 
-    # Example usage of a function defined in CMakeApp.cmake
-    #include(CMakeAppFunctions)  # Include another script if needed
-    #app_specific_function(${APP_NAME})
-    
+    # External dependencies
+    # if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/ext/CMakeLists.txt")
+    #     add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/ext")
+    # endif()
+
     message(STATUS "Configured app: ${APP_NAME}")
 endfunction()

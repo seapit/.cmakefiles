@@ -39,10 +39,8 @@ if(BUILD_TESTS)
   )
   FetchContent_MakeAvailable(googletest)
 
-  enable_testing()
   message(STATUS "Enabling Unit Tests")
-  find_package(GTest CONFIG REQUIRED)
-  
+
   set(GCC_COVERAGE_COMPILE_FLAGS "-g -p0 -coverage-fprofile-arcs -ftest-coverage")
   set(GCC_COVERAGE_LINK_FLAGS "coverage -lgcov")
   set(GTEST_EXTRA_ARGS "--gtest_output=xml:${CMAKE_BINARY_DIR}/build/reports/unitTests")

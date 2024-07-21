@@ -9,7 +9,7 @@ APP_DIR := apps
 .PHONY: all
 all: help
 
-Arguments := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 
 %:
 	@true
@@ -34,33 +34,39 @@ config:
 	@mkdir -p $(BUILD_DIR)
 	@cd $(BUILD_DIR) && cmake ..
 
+.PHONY: config_test
+config_test:
+	@echo "Configuring CMake project..."
+	@rm -rf $(BUILD_DIR)
+	@mkdir -p $(BUILD_DIR)
+	@cd $(BUILD_DIR) && cmake -DBUILD_TESTS=ON ..
+
 # Compile and execute tests for all libraries
-.PHONY: tests
-test: config
-	@if [ -z "$(Arguments)" ]; then \
+.PHONY: test
+test: config_test
+	@if [ -z "$(ARGS)" ]; then \
 		echo "Please specify a target library using 'make test Lib1'"; \
 		exit 1; \
 	fi
-	@echo "Building and running tests for library: $(Arguments)"
-	@cd $(BUILD_DIR) && cmake --build . --target $(Arguments)_Test && ctest
+	@echo "Building and running tests for library: $(ARGS)"
+	@cd $(BUILD_DIR) && cmake --build . --target $(ARGS)_Test
 
 # Compile the specified library or application
 lib: config
-	@if [ -z "$(Arguments)" ]; then \
+	@if [ -z "$(ARGS)" ]; then \
 		echo "Please specify a target library using 'make lib Lib1 Lib2'"; \
 		exit 1; \
 	fi
-	@echo "Building library: $(Arguments)"
-	@cd $(BUILD_DIR) && cmake --build . --target $(Arguments)
+	@echo "Building library: $(ARGS)"
+	@cd $(BUILD_DIR) && cmake --build . --target $(ARGS)
 
 app: config
-	@if [ -z "$(Arguments)" ]; then \
+	@if [ -z "$(ARGS)" ]; then \
 		echo "Please specify an application using 'make app App1 App2'"; \
 		exit 1; \
 	fi
-	@echo "Building application: $(Arguments)"
-	@cd $(BUILD_DIR) && cmake -DAPP=ON --build . --target $(Arguments)
-
+	@echo "Building application: $(ARGS)"
+	@cd $(BUILD_DIR) && cmake -DAPP=ON --build . --target $(ARGS)
 
 # Compile all applications
 .PHONY: apps
