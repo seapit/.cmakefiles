@@ -13,7 +13,13 @@ function(TEST LIB_NAME)
         file(GLOB_RECURSE TEST_SOURCES "${CMAKE_CURRENT_LIST_DIR}/*.cpp")
 
         # Create a test executable
+        get_filename_component(LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
+
+        # Let's get a target for this test
         add_executable(${LIB_NAME}_Test ${TEST_SOURCES})
+
+        # Let's include the lib's includes
+        target_include_directories(${LIB_NAME}_Test PRIVATE ${LIB_DIR}/inc)
 
         # Link libraries
         target_link_libraries(${LIB_NAME}_Test PRIVATE ${LIB_NAME} GTest::gtest_main)

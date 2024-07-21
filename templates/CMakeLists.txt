@@ -31,6 +31,10 @@ option(BUILD_TESTING "Build Unit Tests" ON)
 option(APP "Build Apps" ON)
 
 if(BUILD_TESTING)
+  message(STATUS "Enabling Unit Tests")
+
+  include(CTest)
+
   # Add Google Test
   include(FetchContent)
   FetchContent_Declare(
@@ -38,8 +42,6 @@ if(BUILD_TESTING)
     URL https://github.com/google/googletest/archive/refs/tags/v1.15.0.zip
   )
   FetchContent_MakeAvailable(googletest)
-
-  message(STATUS "Enabling Unit Tests")
 
   set(GCC_COVERAGE_COMPILE_FLAGS "-g -p0 -coverage-fprofile-arcs -ftest-coverage")
   set(GCC_COVERAGE_LINK_FLAGS "coverage -lgcov")
