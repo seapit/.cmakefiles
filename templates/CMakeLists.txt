@@ -4,7 +4,7 @@ include(${CMAKE_SOURCE_DIR}/.cmakefiles/Functions.cmake)
 
 #Project Name
 #get_filename_component(CURRENT_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
-get_filename_component(REPO_NAME ${CMAKE_BINARY_DIR} NAME)
+get_filename_component(REPO_NAME ${CMAKE_CURRENT_LIST_DIR} NAME)
 project(${REPO_NAME})
 
 # Set C++ standard
