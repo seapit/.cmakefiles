@@ -22,7 +22,7 @@ function(TEST LIB_NAME USE_C_FILES USE_GENERATED_FILES)
         endif()
 
         # Create a test executable
-        add_executable(${LIB_NAME} ${TEST_SOURCES})
+        add_executable(${LIB_NAME}_Test ${TEST_SOURCES})
 
         # Include directories
         target_include_directories(${LIB_NAME}_Test PRIVATE ../inc)
