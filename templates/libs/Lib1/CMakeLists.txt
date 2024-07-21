@@ -12,6 +12,6 @@ SET(${LIB_NAME}_TYPE INTERFACE) # ALT: SET(${LIB_NAME}_TYPE STATIC) SET(${LIB_NA
 LIB(${LIB_NAME} ${${LIB_NAME}_TYPE} ${${LIB_NAME}_USE_C} ${${LIB_NAME}_USE_GEN})
 
 # Add subdirectory for tests if enabled
-if(BUILD_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(test)
 endif()

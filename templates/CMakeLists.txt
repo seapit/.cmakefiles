@@ -27,10 +27,10 @@ add_subdirectory(libs)
 add_subdirectory(apps)
 
 # Set Up testing
-option(BUILD_TESTS "Build Unit Tests" ON)
+option(BUILD_TESTING "Build Unit Tests" ON)
 option(APP "Build Apps" ON)
 
-if(BUILD_TESTS)
+if(BUILD_TESTING)
   # Add Google Test
   include(FetchContent)
   FetchContent_Declare(
