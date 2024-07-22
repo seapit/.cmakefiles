@@ -8,6 +8,13 @@ SET(${LIB_NAME}_USE_GEN FALSE CACHE BOOL "If this item doesn't need generated fi
 
 SET(${LIB_NAME}_TYPE INTERFACE) # ALT: SET(${LIB_NAME}_TYPE STATIC) SET(${LIB_NAME}_TYPE SHARED)
 
+#incThreads()
+
+# list(APPEND ${LIB_NAME}_LIBS_TO_ADD A_NAME_HERE)
+# list(APPEND ${LIB_NAME}_LIBS_TO_ADD ANOTHER_NAME_HERE)
+
+# incModule(${LIB_NAME} ${${LIB_NAME}_LIBS_TO_ADD})
+
 # Call the MODULE function with appropriate arguments
 LIB(${LIB_NAME} ${${LIB_NAME}_TYPE} ${${LIB_NAME}_USE_C} ${${LIB_NAME}_USE_GEN})
 

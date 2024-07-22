@@ -44,18 +44,27 @@ function(message)
 endfunction(message)
 
 function(includecfiles)
-        file(GLOB_RECURSE C_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
-        list(APPEND SRC ${C_SOURCES})
+  file(GLOB_RECURSE C_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
+  list(APPEND SRC ${C_SOURCES})
 endfunction()
 
 function(includegeneratedfiles)
-file(GLOB_RECURSE GENERATED_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/generated/*)
-list(APPEND SOURCES ${GENERATED_SOURCES})
+  file(GLOB_RECURSE GENERATED_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/generated/*)
+  list(APPEND SOURCES ${GENERATED_SOURCES})
 endfunction()
 
 
 function(incThreads)
-# Enable P-threads
-# Find the pthread package
-find_package(Threads REQUIRED)
+  # Enable P-threads
+  # Find the pthread package
+  find_package(Threads REQUIRED)
+endfunction()
+
+
+function(incModule LIB LIBS_TO_ADD)
+  foreach(NAME ${${LIBS_TO_ADD}})
+    set(TGT ${LIBDIR}/${NAME}/inc/)
+    target_include_directories(${LIB} PUBLIC ${TGT})
+    target_link_libraries(${LIB} PRIVATE ${NAME})
+  endforeach()
 endfunction()
