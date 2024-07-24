@@ -19,7 +19,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output/staticLib)
-set(CMAKE_COLOR_MAKEFILE ON)
 
 # configure a header file to pass the version number only
 configure_file(Proj.h.in Proj.h)
@@ -44,11 +43,7 @@ if(BUILD_TESTING)
   )
   FetchContent_MakeAvailable(googletest)
 
-
-  set(GCC_COVERAGE_COMPILE_FLAGS "-g -p0  -fprofile-arcs -ftest-coverage")
+  set(GCC_COVERAGE_COMPILE_FLAGS "-g -p0 -coverage -fprofile-arcs -ftest-coverage")
   set(GCC_COVERAGE_LINK_FLAGS "-lgcov")
   set(GTEST_EXTRA_ARGS "--gtest_output=xml:${CMAKE_BINARY_DIR}/build/reports/unitTests")
-
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
-  set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS})
 endif()
