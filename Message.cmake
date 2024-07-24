@@ -1,4 +1,5 @@
 # Found on stack overflow
+# Set colour string values
 if(NOT WIN32)
   string(ASCII 27 Esc)
   set(ColourReset "${Esc}[m")
@@ -19,6 +20,7 @@ if(NOT WIN32)
   set(BoldWhite   "${Esc}[1;37m")
 endif()
 
+# Overload the message function
 function(message)
   list(GET ARGV 0 MessageType)
   if(MessageType STREQUAL FATAL_ERROR OR MessageType STREQUAL SEND_ERROR)

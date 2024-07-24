@@ -10,6 +10,7 @@ function(TEST LIB_NAME)
         # Set extra arguments for gtest
         set(GTEST_EXTRA_ARGS "")
 
+        # Add all cpp files under the directory of the CMakeLists.txt calling this
         file(GLOB_RECURSE TEST_SOURCES "${CMAKE_CURRENT_LIST_DIR}/*.cpp")
 
         # Create a test executable
@@ -28,6 +29,7 @@ function(TEST LIB_NAME)
         include(GoogleTest)
         gtest_discover_tests(${LIB_NAME}_Test EXTRA_ARGS ${GTEST_EXTRA_ARGS})
 
+        # Create target
         add_test(NAME ${LIB_NAME}_Test COMMAND ${LIB_NAME}_Test)
 
         message(STATUS "Configured module: ${LIB_NAME}")
