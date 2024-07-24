@@ -5,10 +5,10 @@ function(APP APP_NAME USE_C USE_GEN)
     # Logic specific to handling an app
     # Replace with actual logic for configuring the app target
     message(STATUS "Configuring app: ${APP_NAME}")
-    
+
     # Example configuration
     add_executable(${APP_NAME})
-    
+
     if(${USE_C})
         file(GLOB_RECURSE C_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
         list(APPEND SOURCES ${C_SOURCES})

@@ -42,4 +42,3 @@ function(LIB LIB_NAME LIB_TYPE USE_C USE_GEN)
 
     message(STATUS "Configured library: ${LIB_NAME}")
 endfunction()
-
