@@ -28,6 +28,12 @@ function(LIB LIB_NAME LIB_TYPE USE_C USE_GEN)
 
         # Include directories
         target_include_directories(${LIB_NAME} PUBLIC "${CMAKE_CURRENT_LIST_DIR}/inc")
+
+    elseif(${LIB_NAME}_TYPE STREQUAL "MODULE")
+        add_library(${LIB_NAME} MODULE ${SOURCES})
+
+        # Include directories
+        target_include_directories(${LIB_NAME} PUBLIC "${CMAKE_CURRENT_LIST_DIR}/inc")
     else()
         add_library(${LIB_NAME} INTERFACE)
 
