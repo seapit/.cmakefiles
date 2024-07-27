@@ -17,8 +17,7 @@ function(includegeneratedfiles)
 endfunction()
 
 function(incThreads)
-  # Enable P-threads
-  # Find the pthread package
+  # Enable P-threads Find the pthread package
   find_package(Threads REQUIRED)
 endfunction()
 
