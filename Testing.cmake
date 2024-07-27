@@ -23,7 +23,12 @@ function(TEST LIB_NAME)
         target_include_directories(${LIB_NAME}_Test PRIVATE ${LIB_DIR}/inc)
 
         # Link libraries
-        target_link_libraries(${LIB_NAME}_Test PRIVATE ${LIB_NAME} GTest::gtest_main)
+        target_link_libraries(${LIB_NAME}_Test PRIVATE ${LIB_NAME} GTest::gtest_main ${GCC_COVERAGE_LINK_FLAGS})
+
+        target_compile_options(${LIB_NAME}_Test PRIVATE
+        $<$<CONFIG:Debug>:${CMAKE_CXX_FLAGS_DEBUG}>
+        $<$<CONFIG:Release>:${CMAKE_CXX_FLAGS_RELEASE}>
+        )
 
         # Discover tests and pass extra arguments
         include(GoogleTest)

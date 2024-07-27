@@ -12,6 +12,10 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++23 -Wall -Wextra -Werror")
 
+# Define the compilation flags for Debug and Release builds
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -g -O0 -fsanitize=address -fsanitize=undefined -coverage -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2 -DNDEBUG")
+
 # Export Compilation commands for SonarLint
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 

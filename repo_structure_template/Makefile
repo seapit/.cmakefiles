@@ -32,24 +32,24 @@ config:
 	@echo "Configuring CMake project..."
 	@rm -rf $(BUILD_DIR)
 	@mkdir -p $(BUILD_DIR)
-	@cd $(BUILD_DIR) && cmake ..
+	@cd $(BUILD_DIR) && cmake -DCMAKE_BUILD_TYPE=Release ..
 
 .PHONY: config_test
 config-test:
 	@echo "Configuring CMake project..."
 	@rm -rf $(BUILD_DIR)
 	@mkdir -p $(BUILD_DIR)
-	@cd $(BUILD_DIR) && cmake -DBUILD_TESTING=ON ..
+	@cd $(BUILD_DIR) && cmake -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug ..
 
 # Compile and execute tests for all libraries
 .PHONY: test
-test: config-test
+test: config_test
 	@if [ -z "$(ARGS)" ]; then \
 		echo "Please specify a target library using 'make test Lib1'"; \
 		exit 1; \
 	fi
 	@echo "Building and running tests for library: $(ARGS)"
-	@cd $(BUILD_DIR) && cmake --build . --target $(ARGS) $(ARGS)_Test
+	@cd $(BUILD_DIR) && cmake --build . --target $(ARGS)_Test
 
 # Compile the specified library or application
 lib: config

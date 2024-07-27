@@ -30,6 +30,12 @@ function(APP APP_NAME USE_C USE_GEN)
     # Add any other configurations needed
     target_link_libraries(${LIB_NAME} PUBLIC)
 
+    target_compile_options(${LIB_NAME}_Test PRIVATE
+    $<$<CONFIG:Debug>:${CMAKE_CXX_FLAGS_DEBUG}>
+    $<$<CONFIG:Release>:${CMAKE_CXX_FLAGS_RELEASE}>
+    )
+
+
     # External dependencies
     # if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/ext/CMakeLists.txt")
     #     add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/ext")
