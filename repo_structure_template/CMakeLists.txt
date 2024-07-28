@@ -12,11 +12,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++23 -Wall -Wextra -Werror")
 
 # Define the compilation flags for Debug and Release builds
-set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -fsanitize=address -fsanitize=undefined")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 
 # Set GCC coverage flags
-set(GCC_COVERAGE_COMPILE_FLAGS "-coverage -fprofile-arcs -ftest-coverage")
+set(GCC_COVERAGE_COMPILE_FLAGS "-coverage -fsanitize=address -fsanitize=undefined -fprofile-arcs -ftest-coverage")
 set(GCC_COVERAGE_LINK_FLAGS "-coverage -fprofile-arcs -ftest-coverage")
 
 # Export Compilation commands for SonarLint
@@ -51,6 +51,6 @@ if(BUILD_TESTING)
   FetchContent_MakeAvailable(googletest)
 
   # Combine debug and coverage flags
-  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${GCC_COVERAGE_COMPILE_FLAGS}")
+  set(CMAKE_CXX_FLAGS_DEBUG "${GCC_COVERAGE_COMPILE_FLAGS}")
   set(GTEST_EXTRA_ARGS "--gtest_output=xml:${CMAKE_BINARY_DIR}/build/reports/unitTests")
 endif()
