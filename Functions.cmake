@@ -19,11 +19,12 @@ endfunction()
 function(incThreads)
   # Enable P-threads Find the pthread package
   find_package(Threads REQUIRED)
+  target_link_libraries(${LIB_NAME} Threads::Threads)
 endfunction()
 
 function(incModule LIBS_TO_ADD)
   foreach(NAME ${${LIBS_TO_ADD}})
+    target_link_libraries(${LIB_NAME} ${NAME})
     target_include_directories(${LIB_NAME} PUBLIC ${LIBDIR}/${NAME}/inc/)
-    target_link_libraries(${LIB_NAME} PRIVATE ${NAME})
   endforeach()
 endfunction()
