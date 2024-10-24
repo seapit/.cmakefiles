@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
 // Define a test fixture class
-class QueueTest : public ::testing::Test {
+class Lib1Test : public ::testing::Test {
 protected:
   // You can remove any or all of the following functions if their bodies would
   // be empty.
 
-  QueueTest() {
+  Lib1Test() {
     // You can do set-up work for each test here.
   }
 
-  ~QueueTest() override {
+  ~Lib1Test() override {
     // You can do clean-up work that doesn't throw exceptions here.
   }
 
@@ -25,4 +25,4 @@ protected:
 };
 
 // Test cases using the test fixture
-TEST_F(QueueTest, InitProbably) {}
+TEST_F(Lib1Test, InitProbably) {}

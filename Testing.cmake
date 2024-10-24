@@ -21,6 +21,8 @@ function(TEST LIB_NAME)
         # Let's include the lib's includes
         target_include_directories(${LIB_NAME}_Test PRIVATE ${LIB_DIR}/inc)
 
+        target_compile_definitions(${LIB_NAME}_Test PRIVATE UNIT_TEST)
+
         # Link libraries
         target_link_libraries(${LIB_NAME}_Test PRIVATE ${LIB_NAME} GTest::gtest_main)
 
