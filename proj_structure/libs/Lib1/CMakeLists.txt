@@ -26,7 +26,7 @@ endif()
 
 # incThreads()
 
-# list(APPEND ${LIB_NAME}_LIBS_TO_ADD A_NAME_HERE) list(APPEND
+# list(APPEND ${LIB_NAME}_LIBS_TO_ADD A_NAME_HERE)
 # ${LIB_NAME}_LIBS_TO_ADD ANOTHER_NAME_HERE)
 
 # incModule(${${LIB_NAME}_LIBS_TO_ADD})
