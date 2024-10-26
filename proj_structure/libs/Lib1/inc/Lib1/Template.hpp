@@ -1,3 +1,8 @@
+/**
+ * @file Lib1.hpp
+ * @brief A brief description of what this file is.
+ */
+
 #pragma once
 #ifndef LIB1__
 #define LIB1__
@@ -12,10 +17,20 @@
 /// DEFINES
 
 /// CODE
-// void testFunction()
-// {
-//   printf("Test App. Sleeping for 10 seconds\n");
-//   sleep(10);
-// }
+
+class Lib1
+{
+  public:
+  /**
+   * @brief Construct a new Lib1 object
+   *
+   */
+    Lib1(){};
+
+  // protected:
+
+  private:
+
+};
 
 #endif //LIB1__
